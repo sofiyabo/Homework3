@@ -6,6 +6,13 @@
 #include <iostream>
 #include <memory>
 
+/*
+Cosas que faltan:
+    Destructores de las clases
+
+    
+*/
+
 //Interfaz
 class Imediciones{
     public:
@@ -21,15 +28,37 @@ class MedicionBase{
         std::unique_ptr<float> tiempoMedicion; //Se usa unique para que el tiempo pertenezca unicamente a la clase
         //Va a ser parte de las clases Presion y Posicion
     public:
-        MedicionBase(float tm) : tiempoMedicion(std::make_unique<float>(tm)) {}
+        MedicionBase(float tm) : tiempoMedicion(std::make_unique<float>(tm)) {} //Pongo contructor o no??
         float getTiempo();
         virtual void imprimir();
 };
 
 //Derivadas
-class Presion : public MedicionBase{ //Preguntar por que estan los comentarios p y q
+class Presion : public MedicionBase{ 
     public:
-        float presionEstatica;
-        float presionDinamica;
+        float presionEstatica; //p
+        float presionDinamica; //q
 
+        Presion(float p, float q, float t) : MedicionBase(t), presionEstatica(p), presionDinamica(q) {}
+
+};
+
+class Posicion : public MedicionBase{
+    public:
+        float latitud;
+        float longitud;
+        float altitud;
+
+        Posicion(float lat, float lon, float alt, float t) : MedicionBase(t), latitud(lat), longitud(lon), altitud(alt) {}
+};
+
+class SaveFlightData{
+    public:
+        const Posicion& posicion;
+        const Presion& presion;
+
+        SaveFlightData(const Posicion& p, const Presion& q) : posicion(p), presion(q) {}
+        void serializar(std::ofstream& out);
+        void deserializar(std::ofstream& in);
+        void imprimir();
 };
