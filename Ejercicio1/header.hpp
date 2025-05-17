@@ -9,8 +9,9 @@
 /*
 Cosas que faltan:
     Destructores de las clases
+    serializar y deserializar declaradas en las derivadas
 
-    
+
 */
 
 //Interfaz
@@ -19,11 +20,10 @@ class Imediciones{
         virtual void serializar(std::ofstream& out) = 0;
         virtual void deserializar(std::ofstream& in) = 0; //deberia ser ifstream?
 
-
 };
 
 //Clase Abstracta
-class MedicionBase{
+class MedicionBase: public Imediciones{
     protected:
         std::unique_ptr<float> tiempoMedicion; //Se usa unique para que el tiempo pertenezca unicamente a la clase
         //Va a ser parte de las clases Presion y Posicion
@@ -31,6 +31,8 @@ class MedicionBase{
         MedicionBase(float tm) : tiempoMedicion(std::make_unique<float>(tm)) {} //Pongo contructor o no??
         float getTiempo();
         virtual void imprimir();
+        void serializar(std::ofstream& out) override;
+        void deserializar(std::ofstream& in) override;
 };
 
 //Derivadas
