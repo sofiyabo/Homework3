@@ -11,6 +11,7 @@ Escriba el código en el main que permita ejemplificar como calcular el área de
 #include <iostream>
 
 //Faltan destructores ??
+//Ver de si los constructores tienen que usar los setters
 //VER USO DE CONST
 
 
@@ -19,6 +20,7 @@ class Punto{
     double x, y;
 
     public:
+    Punto(){};
     Punto(double xp, double yp) : x(xp), y(yp) {} //constructor
     void setX( double nuevoX);
     double getX();
@@ -33,6 +35,7 @@ class Circulo{
     double r;
 
     public:
+    Circulo(){};
     Circulo(double xp, double yp, double radio): centro(xp, yp), r(radio){}
     
     void setXCentro(double nuevoX);
