@@ -8,9 +8,9 @@ En función del tipo, y mediante el uso obligatorio de “if constexpr”, se de
 Además, contendrá el método que finalmente construya el JSON completo y lo imprima por pantalla.
 */
 
+#pragma once
 #include <iostream>
 #include <vector>
-#include <map> //revisar uso de esto
 #include <memory>
 
 
@@ -23,20 +23,76 @@ class Generador{
 
     public:
     Generador()= default;
-    void agregarElemento(const T& elemento); //tengo que hacer que chequee que tipo tiene ya el vector, asi no deja que pongan otra cosa
-    std::string getVectorString();
-    std::string getTipo();
+    void agregarElemento(const T& elemento){
+        vector.push_back(elemento);
+    } //tengo que hacer que chequee que tipo tiene ya el vector, asi no deja que pongan otra cosa
+    std::string getVectorString() const{
+        std::string texto = "[";
+        //uso if constexpr para convertir cada tipo en string
+    
+        if constexpr (std::is_same_v<T, double>){
+            for (size_t i = 0; i< vector.size(); i++){
+                texto += std::to_string(vector[i]);
+                if(i< vector.size() - 1){
+                    texto+= ", ";
+                }
+            }
+        }
+        else if constexpr(std::is_same_v<T, std::string>){
+            for(size_t i = 0; i < vector.size(); i++){
+                texto += vector[i];
+                if(i< vector.size() - 1){
+                    texto+= ", ";
+                }
+            }
+        }
+        else if constexpr(std::is_same_v<T, std::vector<int>>){
+            for (size_t i =0; i<vector.size(); i++){
+                texto += "[";
+                for(size_t j=0; j<vector[i].size(); j++){
+                    texto+= std::to_string(vector[i][j]);
+                    if(j < vector[i].size() -1){
+                        texto+= ", ";
+                    }
+                }
+                texto+= "]";
+                if (i<vector.size() - 1){
+                    texto += ", ";
+                }
+            }
+        }
+        texto +="]";
+        return texto;
+    }
+    std::string getTipo()const{
+        if constexpr(std::is_same_v<T, double>){
+            return "vec_doubles";
+        }
+        else if constexpr(std::is_same_v<T, std::string>){
+            return "palabras";
+        }
+        else if constexpr(std::is_same_v<T, std::vector<int>>){
+            return "matriz_enteros";
+        }
+        else {
+            std::cout<< "Tipo no valido."<< std::endl; //revisar manejo de error
+        }
+    
+    }
 };
 
 class CrearJSON{
     private:
-    //hago tres vectores diferentes e imprimo por orden ?? 
-    std::vector<Generador<double>> doubles;
-    std::vector<Generador<std::string>> texto;
-    std::vector<Generador<std::vector<int>>> listas;
+    std::string cadena_json;
 
     public:
     template <typename T>
-    void agregarGenerador(const Generador<T>& elemento);
+    void agregarGenerador(const Generador<T>& elemento){
+        if(!cadena_json.empty()){
+            cadena_json+= ",\n";
+        }
+    
+        cadena_json+= "\""  + elemento.getTipo() + "\" : " + elemento.getVectorString();
+    }
     void imprimir() const;
 };

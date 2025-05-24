@@ -10,12 +10,14 @@ int main(){
     texto.agregarElemento("Mundo");
 
     Generador<std::vector<int>> lista;
-    lista.agregarElemento({1,2});
-    lista.agregarElemento({3,4});
+    lista.agregarElemento(std::vector<int>{1,2});
+    lista.agregarElemento(std::vector<int>{3,4});
 
     CrearJSON json;
     json.agregarGenerador(doubles);
     json.agregarGenerador(texto);
+    json.agregarGenerador(lista);
+    json.imprimir();
 
     return 0;
 
