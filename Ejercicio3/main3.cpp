@@ -4,6 +4,7 @@ int main(){
     Generador<double> doubles;
     doubles.agregarElemento(1.3);
     doubles.agregarElemento(2.1);
+    doubles.agregarElemento(3.2);
 
     Generador<std::string> texto;
     texto.agregarElemento("Hola");

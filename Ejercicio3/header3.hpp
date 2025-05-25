@@ -11,7 +11,8 @@ Además, contendrá el método que finalmente construya el JSON completo y lo im
 #pragma once
 #include <iostream>
 #include <vector>
-#include <memory>
+#include <sstream>
+#include <iomanip>
 
 
 
@@ -32,7 +33,10 @@ class Generador{
     
         if constexpr (std::is_same_v<T, double>){
             for (size_t i = 0; i< vector.size(); i++){
-                texto += std::to_string(vector[i]);
+                std::stringstream redondeo;
+                redondeo << std::fixed << std::setprecision(1)<< vector[i];
+        
+                texto += redondeo.str();
                 if(i< vector.size() - 1){
                     texto+= ", ";
                 }
@@ -48,16 +52,16 @@ class Generador{
         }
         else if constexpr(std::is_same_v<T, std::vector<int>>){
             for (size_t i =0; i<vector.size(); i++){
-                texto += "[";
+                texto += "\n[";
                 for(size_t j=0; j<vector[i].size(); j++){
                     texto+= std::to_string(vector[i][j]);
                     if(j < vector[i].size() -1){
-                        texto+= ", ";
+                        texto+= ",";
                     }
                 }
                 texto+= "]";
                 if (i<vector.size() - 1){
-                    texto += ", ";
+                    texto += ",";
                 }
             }
         }
