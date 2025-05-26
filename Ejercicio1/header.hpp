@@ -1,19 +1,8 @@
-//Serializar y deserializar:
-// Pasar el estado de un objeto a un archivo y viceversa
-//def: proceso de convertir el estado de un objeto en un formato que se oueda almacenar o transmitir (archivo), 
-//generalmente como una secuencia de bytes. Permite guardar y recuperar info del objeto
 
 #pragma once
 #include <iostream>
 #include <memory>
 
-/*
-Cosas que faltan:
-    Destructores de las clases
-    serializar y deserializar declaradas en las derivadas
-
-
-*/
 
 //Interfaz
 class Imediciones{
@@ -24,7 +13,6 @@ class Imediciones{
 };
 
 //Clase Abstracta
-//Para serializar y deserializar primero se hace la clase base y dsp las derivadas 
 class MedicionBase: public Imediciones{
     protected:
         std::unique_ptr<float> tiempoMedicion; 

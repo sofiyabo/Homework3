@@ -1,7 +1,6 @@
 #include "header.hpp"
 #include <fstream>
 
-//CONSULTAR TEMA CONST EN DESERIALIZACION
 
 float MedicionBase::getTiempo() const {return *tiempoMedicion;}
 

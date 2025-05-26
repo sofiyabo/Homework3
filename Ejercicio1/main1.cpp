@@ -6,7 +6,6 @@ int main(){
     Presion presion(101.3f, 5.8f, 6.1f);
 
     std::ofstream archivo("info_vuelo.dat", std::ios::binary);
-    //agregar si hay un error al abrir
 
     posicion.serializar(archivo);
     presion.serializar(archivo);

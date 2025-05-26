@@ -1,19 +1,7 @@
-/*
-2. Escriba el código para las clases que representan:
-a. Un punto, con su posición (x, y) y los correspondientes setters y getters.
-b. Un círculo, con su posición, radio (r) y los correspondientes setters y getters.
-c. Una elipse, con la posición de su centro, el semieje mayor (a), el semieje menor (b) y los correspondientes setters y getters.
-d. Un rectángulo, con la posición de su vértice izquierdo inferior, su ancho, su largo y los correspondientes métodos setters y getters.
-Cree una clase adicional denominada ProcesadorFigura que utilice especialización de plantilla para calcular el área de las figuras.
-Escriba el código en el main que permita ejemplificar como calcular el área de cada una de las figuras mencionadas
-*/
 
 #pragma once
 #include <iostream>
 
-//Faltan destructores ??
-//Ver de si los constructores tienen que usar los setters
-//VER USO DE CONST
 
 
 class Punto{
@@ -22,7 +10,7 @@ class Punto{
 
     public:
     Punto(){};
-    Punto(double xp, double yp) : x(xp), y(yp) {} //constructor
+    Punto(double xp, double yp) : x(xp), y(yp) {} 
     void setX( double nuevoX);
     double getX();
     void setY(double nuevoY);

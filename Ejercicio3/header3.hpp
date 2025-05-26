@@ -1,12 +1,3 @@
-/*
-Para lograr esto, cree dos clases que colaboren para construir el JSON en partes separadas:
-1. Clase 1: esta clase se encargará de generar los vectores de double y std::string, así como la matriz de enteros. Para ello, se debe utilizar un método para agregar
-los valores y las palabras a la instancia de la clase para luego procesarlas según el tipo de dato que se pasó.
-Deberá utilizar un template para poder trabajar con los distintos tipos de datos.
-En función del tipo, y mediante el uso obligatorio de “if constexpr”, se deberán aplicar distintos métodos para procesar los datos adecuadamente.
-2. Clase 2: Esta clase se encargará de asociar etiquetas (por ejemplo, “palabras”) con su vector/matriz correspondiente (por ejemplo, [“Hola”, “Mundo”]).
-Además, contendrá el método que finalmente construya el JSON completo y lo imprima por pantalla.
-*/
 
 #pragma once
 #include <iostream>
@@ -20,13 +11,13 @@ Además, contendrá el método que finalmente construya el JSON completo y lo im
 template <typename T>
 class Generador{  
     private:
-    std::vector<T> vector; // el generador siempre va a generar un vector, solo que varia T
+    std::vector<T> vector; 
 
     public:
     Generador()= default;
     void agregarElemento(const T& elemento){
         vector.push_back(elemento);
-    } //tengo que hacer que chequee que tipo tiene ya el vector, asi no deja que pongan otra cosa
+    } 
     std::string getVectorString() const{
         std::string texto = "[";
         //uso if constexpr para convertir cada tipo en string
@@ -76,10 +67,10 @@ class Generador{
             return "palabras";
         }
         else if constexpr(std::is_same_v<T, std::vector<int>>){
-            return "matriz_enteros";
+            return "listas";
         }
         else {
-            std::cout<< "Tipo no valido."<< std::endl; //revisar manejo de error
+            std::cout<< "Tipo no valido."<< std::endl; 
         }
     
     }
