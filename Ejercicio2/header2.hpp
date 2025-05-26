@@ -8,6 +8,7 @@ Cree una clase adicional denominada ProcesadorFigura que utilice especializació
 Escriba el código en el main que permita ejemplificar como calcular el área de cada una de las figuras mencionadas
 */
 
+#pragma once
 #include <iostream>
 
 //Faltan destructores ??

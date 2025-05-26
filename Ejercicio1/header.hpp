@@ -3,6 +3,7 @@
 //def: proceso de convertir el estado de un objeto en un formato que se oueda almacenar o transmitir (archivo), 
 //generalmente como una secuencia de bytes. Permite guardar y recuperar info del objeto
 
+#pragma once
 #include <iostream>
 #include <memory>
 
